@@ -1,2 +1,42 @@
-//Basic onOpen menu for Apps Script
+/* Basic onOpen menu for Apps Script
+This is utilized in Google Sheets to create a customer menu based on a list of emails within the Google Sheet
+*/
 
+//Constants
+const ss = SpreadsheetApp.Active() //Your currently active spreadsheet
+const email_list_sheet = ss.getSheetByName('Email List') //An individual sheet named Email List
+const email_list_col = 1 //In the Email List sheet, this would reference the first column and is assuming your emails are listed here
+
+function onOpen(){
+    var ui = SpreadsheetApp.getUi();
+    var user_email = Session.getActiveUser().getEmail(); //Google email address
+    var email_list_lr = email_list.getLastRow(); //Apps script Sheets specific function for last data row
+    var email_list = email_list_sheet.getRange(1,1,email_list_lr).getValues()//getRange references row, column, count of rows, count of columns
+    email_list.flat() //Apps script creates an array of arrays so this will need to be flattened in order to index an email address
+    var index_email = email_list.indexOf(user_email);
+    //If user email is not found within the user list, Menu Name menu will be added
+    if (index_email == -1){
+        ui.CreateMenu('Menu Name') //The menu will appear as the last menu option on the Sheets App toolbar
+            .addItem('Function Desc','customFunction') //Each menu item has a descriptor and then the called function
+            .addSeparator() //Creates a visual separator between menu items
+            .addItem('Other Function Desc','customFunction2')
+            .addToUi();//Finally adds the menu to the UI
+    }
+    else{
+        ui.CreateMenu('Menu Name 2')
+            .addItem('Third Function Desc','customFunction3')
+            .addToUi();
+    }
+}
+
+function customFunction(){
+    //Fake function 1
+}
+
+function customFunction2(){
+    //Fake function 2
+}
+
+function customFunction3(){
+    //Fake function 3
+}
