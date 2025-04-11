@@ -29,6 +29,22 @@ function onOpen(){
     }
 }
 
+function ok_message_box(){
+
+}
+
+function y_n_message_box(){
+
+}
+
+function input_message_box(){
+
+}
+
+function html_dialog(){
+    
+}
+
 function customFunction(){
     //Fake function 1
 }
