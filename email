@@ -1,1 +1,15 @@
+//Sending emails via Google email
 
+function send_email(){
+    try{
+        var recipient_emails = 'email@email.com, next_email@email.com'
+        var cc_emails = 'cc_email1@email.com, cc_email2@email.com'
+        var subject = 'Email Subject'
+        var html_message = "<p>Here is the email message. You can use HTML in the message or not.</p>"
+        MailApp.sendEmail(recipient_emails, subject, html_message, {htmlBody: html_message, cc:cc_emails})
+    }
+    catch (err){
+        SpreadsheetApp.getUi().alert("Error Occurred","An error occurred while running this process. Review the error: " + err.message, SpreadsheetApp.getUi().ButtonSet.OK);
+        Logger.log(err.stack)
+    }
+}
